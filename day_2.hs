@@ -40,6 +40,7 @@ runAim :: [(Direction, Int)] -> (Int, Int, Int)
 runAim = foldl execAim (0, 0, 0)
 
 
+main :: IO ()
 main = do
     commands <- map parseCommand . lines <$> readFile "day_2_input.txt"
     let (h, d) = run commands

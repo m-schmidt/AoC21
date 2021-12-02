@@ -46,7 +46,7 @@ slidingWindow n xs | n > 1 = map (finalizeWith sum) $ filter (valid n) $ scanl (
 slidingWindow _ _          = undefined
 
 
-
+main :: IO ()
 main = do
     depths <- map read . lines <$> readFile "day_1_input.txt"
     putStrLn $ "#1: " ++ show (countIncreases $ depthChanges depths)
