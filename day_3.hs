@@ -15,7 +15,7 @@ parseBitString = mapMaybe parse
 toInt :: [Int] -> Int
 toInt = foldl (\a b -> a*2 + b) 0
 
--- threshold for most/least bits - roundes upwards in case number of input lines is odd
+-- threshold for most/least bits - rounded upwards in case number of input lines is odd
 threshold :: [a] -> Int
 threshold xs = (length xs + 1) `div` 2
 
