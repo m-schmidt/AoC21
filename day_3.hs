@@ -18,7 +18,7 @@ toInt = foldl (\a b -> a*2 + b) 0
 count :: [Int] -> Int
 count bs = if sum bs > threshold then 1 else 0
     where
-        -- threshold for most/least bits - roundes upwards in case number of input lines is odd
+        -- threshold for most/least bits - rounded upwards in case number of input lines is odd
         threshold = (length bs + 1) `div` 2
 
 -- 2 Life support rating
