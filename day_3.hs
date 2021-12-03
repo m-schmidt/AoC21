@@ -4,7 +4,7 @@ import Data.List
 import Data.Maybe
 
 
--- 1 Gamme/epsilon rate
+-- 1 Gamma/epsilon rate
 parseBitString :: String -> [Int]
 parseBitString = mapMaybe parse
     where
