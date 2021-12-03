@@ -31,7 +31,7 @@ count' cmp bss =
     let (bit, bss')  = if length bss0 `cmp` length bss1 then (1, bss1) else (0, bss0) in
     bit : count' cmp (map tail bss')
 
--- Oxygen: select 1, when there are fewer 0s than 1s
+-- Oxygen: select 1, when there are fewer or same amount of 0s than 1s
 countOxygen :: [[Int]] -> [Int]
 countOxygen = count' (<=)
 
