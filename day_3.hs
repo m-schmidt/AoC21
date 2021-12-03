@@ -15,13 +15,11 @@ parseBitString = mapMaybe parse
 toInt :: [Int] -> Int
 toInt = foldl (\a b -> a*2 + b) 0
 
--- threshold for most/least bits - rounded upwards in case number of input lines is odd
-threshold :: [a] -> Int
-threshold xs = (length xs + 1) `div` 2
-
-count :: Int -> [Int] -> Int
-count t bs = if sum bs > t then 1 else 0
-
+count :: [Int] -> Int
+count bs = if sum bs > threshold then 1 else 0
+    where
+        -- threshold for most/least bits - roundes upwards in case number of input lines is odd
+        threshold = (length bs + 1) `div` 2
 
 -- 2 Life support rating
 count' :: (Int -> Int -> Bool) -> [[Int]] -> [Int]
@@ -45,13 +43,13 @@ main = do
     bits <- map parseBitString . lines <$> readFile "day_3_input.txt"
     let bits' = transpose bits
 
-    -- since no filtering is needed count on transposed bit strings
-    let most    = count (threshold bits) <$> bits'
+    -- since no filtering per column is needed count on transposed bit strings
+    let most    = count <$> bits'
     let gamma   = toInt most
     let epsilon = toInt $ map (1-) most
     putStrLn $ "#1: " ++ show (gamma * epsilon)
 
-    -- count with filtering
+    -- count with filtering per column
     let oxygen =  toInt $ countOxygen bits
     let co2    =  toInt $ countCO2 bits
     putStrLn $ "#2: " ++ show (oxygen * co2)
