@@ -21,6 +21,7 @@ count bs = if sum bs > threshold then 1 else 0
         -- threshold for most/least bits - rounded upwards in case number of input lines is odd
         threshold = (length bs + 1) `div` 2
 
+
 -- 2 Life support rating
 count' :: (Int -> Int -> Bool) -> [[Int]] -> [Int]
 count' cmp [b] = b

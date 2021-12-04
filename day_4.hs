@@ -51,13 +51,13 @@ parseBoards = map mkBoard . foldl parse []
         parse _      _    = undefined
 
 
--- Play a board returning a tuple of step and score in case it wins
+-- Try to play a board until it wins retuning a tuple of winning step number and final score
 play :: Num t => t -> [Int] -> Board -> Maybe (t, Int)
-play _   []     _ = Nothing
-play cnt (r:rs) b =
+play _ []     _ = Nothing
+play s (r:rs) b =
     if wins b'
-    then Just (cnt, score r b')
-    else play (cnt+1) rs b'
+    then Just (s, score r b')
+    else play (s+1) rs b'
     where
         b' = mark r b
 
