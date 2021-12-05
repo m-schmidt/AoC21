@@ -30,6 +30,12 @@ points (V x y1 y2)     = S.fromList [ (x,y) | y <- [y1..y2] ]
 points (X x1 y1 x2 y2) = S.fromList [ (x,y) | x <- [x1..x2], let y = y1 + signum (y2-y1) * (x-x1)]
 
 commonPoints :: Line -> Line -> S.Set (Int, Int)
+-- optimizations for simple cases - better: compute common points directly instead via intersection of sets
+commonPoints (H y_1 x1_1 x2_1) (H y_2 x1_2 x2_2) | y_1 /= y_2 || x2_1 < x1_2 || x2_2 < x1_1 = S.empty
+commonPoints (V x_1 y1_1 y2_1) (V x_2 y1_2 y2_2) | x_1 /= x_2 || y2_1 < y1_2 || y2_2 < y1_1 = S.empty
+commonPoints (H y x1 x2) (V x y1 y2) = if x1 <= x && x <= x2 && y1 <= y && y <= y2 then S.singleton (x,y) else S.empty
+commonPoints (V x y1 y2) (H y x1 x2) = if x1 <= x && x <= x2 && y1 <= y && y <= y2 then S.singleton (x,y) else S.empty
+-- fallback case
 commonPoints l1 l2 = S.intersection (points l1) (points l2)
 
 countCommons :: [Line] -> Int
