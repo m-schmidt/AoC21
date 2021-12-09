@@ -36,7 +36,6 @@ solve1 m = sum . map ((+1) . at m) $ lowPoints m
 basin :: M Int -> (Int, Int) -> S.Set (Int, Int)
 basin m x = go S.empty [x]
     where
-        -- iterate over a pair of basin menbers and a worklist
         go :: S.Set (Int, Int) -> [(Int, Int)] -> S.Set (Int, Int)
         go v [] = v
         go v (p:ps) | S.member p v = go v ps
