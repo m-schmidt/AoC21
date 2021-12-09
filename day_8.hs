@@ -4,7 +4,6 @@ import Data.List ( sort, find, nub )
 import qualified Data.Set as S
 import qualified Data.Map.Strict as M
 import Data.Maybe ( fromJust )
-import qualified Data.List as List
 
 
 parse :: String -> ([S.Set Char], [S.Set Char])
