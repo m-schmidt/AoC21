@@ -42,8 +42,8 @@ alg (Node _ ts) = sum ts
 
 
 -- Hylomorphism for the algorithm
-run :: M.Map String (S.Set String) -> Bool -> Int
-run plan f = hylo alg (coa plan) initial_d
+solve :: M.Map String (S.Set String) -> Bool -> Int
+solve plan f = hylo alg (coa plan) initial_d
     where
         initial_d = D "start" (V (S.singleton "start") f)
 
@@ -63,5 +63,5 @@ collect (a, b) = M.alter (upd b) a . M.alter (upd a) b
 main :: IO ()
 main = do
     plan <- foldr (collect . parse) M.empty . lines <$> readFile  "day_12_input.txt"
-    putStrLn $ "#1: " ++ show (run plan False)
-    putStrLn $ "#2: " ++ show (run plan True)
+    putStrLn $ "#1: " ++ show (solve plan False)
+    putStrLn $ "#2: " ++ show (solve plan True)
