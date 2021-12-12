@@ -35,20 +35,20 @@ coa ni (D c v)     = Node c (map go ns)
         ns   = filter (canVisit v) . S.elems $ ni M.! c
         go n = D n (visit n v)
 
--- Algebra to count valid paths in the case
+-- Algebra to count valid paths through the caves
 alg :: TreeF Int -> Int
 alg (Leaf _)    = 1
 alg (Node _ ts) = sum ts
 
 
--- Hylomorphismus for the algorithm
+-- Hylomorphism for the algorithm
 run :: M.Map String (S.Set String) -> Bool -> Int
 run plan f = hylo alg (coa plan) initial_d
     where
         initial_d = D "start" (V (S.singleton "start") f)
 
 
--- parse input as map from cave to set of neighbored caves
+-- Parse input as map from cave to set of neighbored caves
 parse :: String -> (String, String)
 parse s = (head xs, last xs)
     where xs = words $ map (\c -> if c == '-' then ' ' else c) s
