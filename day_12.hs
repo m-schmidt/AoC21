@@ -3,7 +3,7 @@
 
 import qualified Data.Set as S
 import qualified Data.Map.Strict as M
-import Recursion ( Coalgebra, Fix, hylo )
+import Recursion ( hylo, Algebra, Coalgebra )
 import Data.Char (isUpper, isLower)
 
 
@@ -36,7 +36,7 @@ coa ni (D c v)     = Node c (map go ns)
         go n = D n (visit n v)
 
 -- Algebra to count valid paths through the caves
-alg :: TreeF Int -> Int
+alg :: Algebra TreeF Int
 alg (Leaf _)    = 1
 alg (Node _ ts) = sum ts
 
